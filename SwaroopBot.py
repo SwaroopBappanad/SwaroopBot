@@ -22,6 +22,6 @@ async def on_message(message):
     await message.channel.send()
     
 
-client.run('NzUzMzg0OTkwMDc0NDcwNTgy.X1lacg.Fnxs96WghFuzxOvFNsL_pA5fuF8')
+client.run('DISCORD_SECRET')
 #https://docs.python.org/3/library/time.html#time.localtime
 
