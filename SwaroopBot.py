@@ -21,6 +21,7 @@ def convert(lst):
 
 @client.event
 async def on_message(message):
+   message.content = message.content.lower()
    global moderationLevel
    global loserMode
    global spam
@@ -33,7 +34,7 @@ async def on_message(message):
        if (blacklist[i] == str(message.content[12:])):
          del blacklist[i]
          await message.channel.send(f'Succesfully whitelisted the word {str(message.content[12:])}')
-
+   newChar = ''
    lst = [str(message.content)]
    words = convert(lst)
    for word in words:
@@ -43,6 +44,17 @@ async def on_message(message):
      elif word in nono_words:
        await message.channel.purge(limit=1)
        await message.channel.send("No bad words! Language you hippie!") 
+   for char in str(message.content):
+     if char == ' ':
+       pass
+     else:
+       newChar += char
+   
+  #Make sure the hippies don't decieve the bot
+   for i in range(len(nono_words)):
+     if nono_words[i] in newChar:
+       await message.channel.purge(limit=1)
+       await message.channel.send("AAAAH, thought u could decieve me did ya hippie?!")
 
    if '!purge' in str(message.content):
       await message.channel.purge(limit=int(message.content[6:])+1)
